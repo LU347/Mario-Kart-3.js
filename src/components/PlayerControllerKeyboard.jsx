@@ -500,6 +500,17 @@ export const PlayerControllerKeyboard = ({
       actions.useItem();
     }
 
+    if (shootPressed & item == "goldenMushroom") {
+        if (!timerRunning) {
+          //start timer
+        } else {
+          setIsBoosting(true);
+          effectiveBoost.current = 300;
+        }
+        
+        actions.useItem();
+    }
+
     player.setState("position", body.current.translation());
     player.setState("rotation", kartRotation + mario.current.rotation.y);
     player.setState("isBoosting", isBoosting);
