@@ -90,6 +90,7 @@ export const PlayerController = ({
   const [shouldLaunch, setShouldLaunch] = useState(false);
   const effectiveBoost = useRef(0);
   const text = useRef();
+  const [timerRunning, setTimerRunning] = useState(false);
 
   const { actions, shouldSlowDown, item, bananas, coins, id, controls } =
     useStore();
@@ -511,6 +512,20 @@ export const PlayerController = ({
       effectiveBoost.current = 300;
       actions.useItem();
     }
+
+    if (shootPressed & item == "goldenMushroom") {
+      if (!timerRunning) {
+        setTimerRunning(true);
+        setTimeout(() => {
+          setTimerRunning(false);
+        }, 7500);
+      } else {
+        setIsBoosting(true);
+        effectiveBoost.current = 300;
+      }
+
+      actions.useItem();
+  }
 
     player.setState("position", body.current.translation());
     player.setState("rotation", kartRotation + mario.current.rotation.y);
